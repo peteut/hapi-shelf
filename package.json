@@ -1,0 +1,34 @@
+{
+  "name": "hapi-bookshelf",
+  "version": "0.0.1",
+  "description": "Hapi plugin for Bookshelf",
+  "main": "index",
+  "scripts": {
+    "test": "make test-cov"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@spacegit.unibe.ch:alain.peteut/hapi-bookshelf.git"
+  },
+  "keywords": [
+    "hapi",
+    "bookshelf"
+  ],
+  "author": "Alain Péteut",
+  "license": "MIT",
+  "devDependencies": {
+    "bookshelf": "^0.7.9",
+    "code": "^1.2.1",
+    "hapi": "^8.0.0",
+    "joi": "^5.0.2",
+    "lab": "^5.1.0",
+    "mysql": "^2.5.4",
+    "sqlite3": "^3.0.4"
+  },
+  "dependencies": {
+    "boom": "^2.6.1",
+    "hoek": "^2.10.0",
+    "joi": "^5.0.2",
+    "knex": "^0.7.3"
+  }
+}
