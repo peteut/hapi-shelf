@@ -13,4 +13,6 @@ test-cov-html:
 lint:
 	@node node_modules/lab/bin/lab -L -v
 
+test-jenkins: test-cov-junit lint
+
 .PHONY: test test-cov test-cov-junit test-cov-html lint

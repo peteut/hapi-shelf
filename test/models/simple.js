@@ -1,9 +1,9 @@
 'use strict';
 
-var getSimple = function (bookshelf) {
-    var simple = bookshelf.Model.extend({
+module.exports = function (bookshelf) {
+    var Simple = bookshelf.Model.extend({
             tableName: 'table'
     });
-};
 
-module.exports = getSimple;
+    return bookshelf.model('Simple', Simple);
+};
