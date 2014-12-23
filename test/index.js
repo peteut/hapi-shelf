@@ -35,7 +35,6 @@ describe('register()', function () {
                 filename: './db.sqlite'
             }
         },
-        plugins: ['registry'],
         models: [Path.join(__dirname, './models/simple')]
     };
 
