@@ -3,17 +3,12 @@
 // Load modules
 
 var Path = require('path');
-var Util = require('util');
 var Hapi = require('hapi');
 var Code = require('code');
 var Lab = require('lab');
 var Pkg = require('../package.json');
 var R = require('ramda');
 var Bookshelf = require('..');
-
-// Declare internals
-
-var internals = {};
 
 // Test shortcuts
 
@@ -22,7 +17,10 @@ var describe = lab.describe;
 var it = lab.it;
 var expect = Code.expect;
 
-var inspect = R.rPartial(Util.inspect, false, null, true);
+//var inspect = R.rPartial(Util.inspect, false, null, true);
+var throwIfError = R.ifElse(R.is(Error),
+    function (err) {throw err;},
+    function () {});
 
 var getPlugin = R.pipe(R.prop('plugins'), R.prop(Pkg.name));
 
@@ -37,7 +35,6 @@ describe('register()', function () {
         },
         models: [Path.join(__dirname, './models/simple')]
     };
-
 
     it('registers bookshelf w/ sqlite3', function (done) {
         var server = new Hapi.Server();
@@ -83,7 +80,7 @@ describe('register()', function () {
             });
     });
 
-    it('throws on bogus options.knex.connection', function (done) {
+    it('returns an Error on bogus options.knex.connection', function (done) {
         var options = {
             knex: {
                 client: 'mysql'
@@ -91,10 +88,25 @@ describe('register()', function () {
         };
         var server = new Hapi.Server();
         expect(function () {
-            server.register({register: Bookshelf,
+            return server.register({register: Bookshelf,
                 options: options},
-                function () {});
+                throwIfError);
         }).to.throw(/Invalid options .+/);
+        done();
+    });
+
+    it('returns en Error on bogus options.knex.client', function (done) {
+        var options = {
+            kne: {
+                client: 'bogos-client'
+            }
+        };
+        var server = new Hapi.Server();
+        expect(function () {
+            return server.register({register: Bookshelf,
+                    options: options},
+                    throwIfError);
+        }).to.throw(/Invalid knex options: .+/);
         done();
     });
 
@@ -109,7 +121,7 @@ describe('register()', function () {
             });
     });
 
-    it('throws on bogus options.plugins', function (done) {
+    it('returns an Error on bogus options.plugins', function (done) {
         var options = {
             knex: {
                 client: 'sqlite3',
@@ -123,7 +135,7 @@ describe('register()', function () {
         expect(function () {
             server.register({register: Bookshelf,
                 options: options},
-                function () {});
+                throwIfError);
         }).to.throw(/Invalid plugin .+/);
         done();
     });
@@ -140,12 +152,12 @@ describe('register()', function () {
             });
     });
 
-    it('throws on bogus options.models', function (done) {
+    it('returns an Error on bogus options.models', function (done) {
         var server = new Hapi.Server();
         expect(function () {
             server.register({register: Bookshelf,
                 options: R.mixin(optionsSqlite3WithModel, {models: [123]})},
-                function () {});
+                throwIfError);
         }).to.throw(/Invalid model path .+/);
         done();
     });
@@ -155,6 +167,9 @@ describe('register()', function () {
         server.register({register: Bookshelf,
             options: optionsSqlite3WithModel},
             function (err) {
+                if (err) {
+                    throw err;
+                }
                 /* eslint-disable */
                 expect(getPlugin(server).model('Simple').forge()
                 .parse({foo_bar: 1})).to.include('fooBar');
@@ -168,6 +183,9 @@ describe('register()', function () {
         server.register({register: Bookshelf,
             options: optionsSqlite3WithModel},
             function (err) {
+                if (err) {
+                    throw err;
+                }
                 expect(getPlugin(server).model('Simple').forge()
                 .format({fooBar: 1})).to.include('foo_bar');
                 done();

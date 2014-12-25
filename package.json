@@ -8,17 +8,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@spacegit.unibe.ch:alain.peteut/hapi-bookshelf.git"
+    "url": "https://github.com/peteut/hapi-bookshelf"
   },
   "keywords": [
     "hapi",
     "bookshelf"
   ],
-  "author": "Alain Péteut",
+  "author": "Alain Péteut <alain.peteut@yahoo.com>",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/peteut/hapi-bookshelf/issues"
+  },
+  "homepage": "https://github.com/peteut/hapi-bookshelf",
   "devDependencies": {
-    "bookshelf": "^0.7.9",
     "code": "^1.2.1",
+    "coveralls": "^2.11.2",
     "eslint": "^0.10.2",
     "hapi": "^8.0.0",
     "lab": "^5.1.0",
@@ -26,7 +30,7 @@
     "sqlite3": "^3.0.4"
   },
   "dependencies": {
-    "boom": "^2.6.1",
+    "bookshelf": "^0.7.9",
     "hoek": "^2.10.0",
     "joi": "^5.0.2",
     "knex": "^0.7.3",
