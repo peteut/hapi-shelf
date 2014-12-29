@@ -1,4 +1,4 @@
-# hapi-bookshelf
+# hapi-shelf
 
 [![Build Status](https://travis-ci.org/peteut/hapi-bookshelf.svg)](
 https://travis-ci.org/peteut/hapi-bookshelf)
@@ -11,26 +11,26 @@ https://coveralls.io/r/peteut/hapi-bookshelf?branch=master)
 [![Build Status (private)](https://oberon.unibe.ch:443/jenkins/job/hapi-bookshelf/badge/icon)](
 https://oberon.unibe.ch:443/jenkins/job/hapi-bookshelf/)
 
-**hapi-bookshelf** is a [Hapi](http://hapijs.com) plugin for [Bookshelf.js](
+**hapi-shelf** is a [Hapi](http://hapijs.com) plugin for [Bookshelf.js](
 http://bookshelfjs.org), an ORM for RDBMS.
 
 ## Usage
 
-Install **hapi-bookshelf** into your hapi project folder:
+Install **hapi-shelf** into your hapi project folder:
 
 ```bash
-npm install hapi-bookshelf-db --save
+npm install hapi-shelf --save
 ```
 
 Register the plugin with the server:
 
 ```javascript
 var Hapi = require('hapi');
-var HapiBookshelf = require('hapi-bookshelf-db');
+var HapiShelf = require('hapi-shelf');
 
 var server = Hapi.Server();
 server.register({
-	register: HapiBookshelf,
+	register: HapiShelf,
 	options: {
 		// Knex connection, refer to http://knexjs.org
 		knex: {
@@ -53,7 +53,7 @@ server.register({
 			// Cannot proceed from here.
 			throw err;
 		}
-		// Bookshelf instance is now available at server.plugins['hapi-bookshelf-db'].
+		// Bookshelf instance is now available at server.plugins['hapi-shelf'].
 	});
 ```
 

@@ -1,5 +1,5 @@
 {
-  "name": "hapi-bookshelf-db",
+  "name": "hapi-shelf",
   "version": "1.0.0-0",
   "description": "Hapi plugin for Bookshelf",
   "main": "index",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/peteut/hapi-bookshelf"
+    "url": "https://github.com/peteut/hapi-shelf"
   },
   "keywords": [
     "hapi",
@@ -17,9 +17,9 @@
   "author": "Alain Péteut <alain.peteut@yahoo.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/peteut/hapi-bookshelf/issues"
+    "url": "https://github.com/peteut/hapi-shelf/issues"
   },
-  "homepage": "https://github.com/peteut/hapi-bookshelf",
+  "homepage": "https://github.com/peteut/hapi-shelf",
   "devDependencies": {
     "code": "^1.2.1",
     "coveralls": "^2.11.2",
