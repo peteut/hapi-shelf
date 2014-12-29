@@ -1,5 +1,5 @@
 {
-  "name": "hapi-bookshelf",
+  "name": "hapi-bookshelf-db",
   "version": "0.0.1",
   "description": "Hapi plugin for Bookshelf",
   "main": "index",

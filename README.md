@@ -13,3 +13,52 @@ https://oberon.unibe.ch:443/jenkins/job/hapi-bookshelf/)
 
 **hapi-bookshelf** is a [Hapi](http://hapijs.com) plugin for [Bookshelf.js](
 http://bookshelfjs.org), an ORM for RDBMS.
+
+## Usage
+
+Install **hapi-bookshelf** into your hapi project folder:
+
+```bash
+npm install hapi-bookshelf-db --save
+```
+
+Register the plugin with the server:
+
+```javascript
+var Hapi = require('hapi');
+var HapiBookshelf = require('hapi-bookshelf-db');
+
+var server = Hapi.Server();
+server.register({
+	register: HapiBookshelf,
+	options: {
+		// Knex connection, refer to http://knexjs.org
+		knex: {
+			client: 'mysql'
+			connection: {
+				host: '127.0.0.1',
+				user: 'db_user',
+				password: 'db_secret',
+				database: 'db_name'
+				}
+			},
+		// Bookshelf Plugins.
+		plugins: ['registry'],
+		// Register models w/ Bookshelf.
+		models: [Path.join(__dirname, './models/user')],
+		}
+	},
+	function (err) {
+		if (err) {
+			// Cannot proceed from here.
+			throw err;
+		}
+		// Bookshelf instance is now available at server.plugins['hapi-bookshelf-db'].
+	});
+```
+
+## Options
+
+* `knex` - (required) the [knex](http://knexjs.org) configuration object.
+* `plugins` - an optional array of strings. Defaults to `['registry']`.
+* `models` - an optional array of model strings.
