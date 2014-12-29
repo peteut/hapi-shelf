@@ -1,14 +1,17 @@
 # hapi-shelf
 
-[![Build Status](https://travis-ci.org/peteut/hapi-bookshelf.svg)](
-https://travis-ci.org/peteut/hapi-bookshelf)
-[![Dependencies](https://david-dm.org/peteut/hapi-bookshelf.svg)](
-https://david-dm.org/peteut/hapi-bookshelf)
-[![devDependencies](https://david-dm.org/peteut/hapi-bookshelf/dev-status.svg)](
-https://david-dm.org/peteut/hapi-bookshelf)
-[![Coverage Status](https://img.shields.io/coveralls/peteut/hapi-bookshelf.svg)](
-https://coveralls.io/r/peteut/hapi-bookshelf?branch=master)
-[![Build Status (private)](https://oberon.unibe.ch:443/jenkins/job/hapi-bookshelf/badge/icon)](
+[![Build Status](https://travis-ci.org/peteut/hapi-shelf.svg)](
+https://travis-ci.org/peteut/hapi-shelf)
+[![Dependencies](https://david-dm.org/peteut/hapi-shelf.svg)](
+https://david-dm.org/peteut/hapi-shelf)
+[![devDependencies](https://david-dm.org/peteut/hapi-shelf/dev-status.svg)](
+https://david-dm.org/peteut/hapi-shelf)
+[![Coverage Status](https://img.shields.io/coveralls/peteut/hapi-shelf.svg)](
+https://coveralls.io/r/peteut/hapi-shelf?branch=master)
+[![npm version](https://badge.fury.io/js/hapi-shelf.svg)](
+http://badge.fury.io/js/hapi-shelf)
+[![Build Status (private)](
+https://oberon.unibe.ch:443/jenkins/job/hapi-bookshelf/badge/icon)](
 https://oberon.unibe.ch:443/jenkins/job/hapi-bookshelf/)
 
 **hapi-shelf** is a [Hapi](http://hapijs.com) plugin for [Bookshelf.js](
