@@ -3,6 +3,9 @@
         "node": true
     },
     "rules": {
-        "quotes": [2, "single"]
+        "quotes": [2, "single"],
+        "brace-style": [2, "stroustrup", { "allowSingleLine": true }],
+        "func-style": [2, "declaration"],
+        "consistent-this": [0, "self"]
     }
 }

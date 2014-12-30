@@ -25,36 +25,41 @@ npm install hapi-shelf --save
 Register the plugin with the server:
 
 ```javascript
+var Path = require('path');
 var Hapi = require('hapi');
 var HapiShelf = require('hapi-shelf');
 
 var server = Hapi.Server();
-server.register({
-	register: HapiShelf,
-	options: {
-		// Knex connection, refer to http://knexjs.org
-		knex: {
-			client: 'mysql'
-			connection: {
-				host: '127.0.0.1',
-				user: 'db_user',
-				password: 'db_secret',
-				database: 'db_name'
-				}
-			},
-		// Bookshelf Plugins.
-		plugins: ['registry'],
-		// Register models w/ Bookshelf.
-		models: [Path.join(__dirname, './models/user')],
-		}
-	},
-	function (err) {
-		if (err) {
-			// Cannot proceed from here.
-			throw err;
-		}
-		// Bookshelf instance is now available at server.plugins['hapi-shelf'].
-	});
+
+server.register(
+    {
+        register: HapiShelf,
+        options: {
+            // Knex connection, refer to http://knexjs.org
+            knex: {
+                client: 'mysql'
+                connection: {
+                    host: '127.0.0.1',
+                    user: 'db_user',
+                    password: 'db_secret',
+                    database: 'db_name'
+                }
+            },
+            // Bookshelf Plugins.
+            plugins: ['registry'],
+            // Register models w/ Bookshelf.
+            models: [Path.join(__dirname, './models/user')],
+        }
+    },
+    function (err) {
+
+        if (err) {
+            // Cannot proceed from here.
+            throw err;
+        }
+        // Bookshelf instance is now available at server.plugins['hapi-shelf'].
+    }
+);
 ```
 
 ## Options
