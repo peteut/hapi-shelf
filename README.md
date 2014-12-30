@@ -2,6 +2,9 @@
 
 [![Build Status](https://travis-ci.org/peteut/hapi-shelf.svg)](
 https://travis-ci.org/peteut/hapi-shelf)
+[![Build
+Status](https://ci.appveyor.com/api/projects/status/github/peteut/hapi-shelf?svg=true)](
+https://ci.appveyor.com/project/peteut/hapi-shelf)
 [![Dependencies](https://david-dm.org/peteut/hapi-shelf.svg)](
 https://david-dm.org/peteut/hapi-shelf)
 [![devDependencies](https://david-dm.org/peteut/hapi-shelf/dev-status.svg)](

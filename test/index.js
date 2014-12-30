@@ -27,7 +27,7 @@ var throwIfError = R.ifElse(R.is(Error),
 
 var getPlugin = R.pipe(R.prop('plugins'), R.prop(Pkg.name));
 
-describe('register()', function () {
+describe('Hapi-shelf Plugin', function () {
 
     var optionsSqlite3WithModel = {
         knex: {

@@ -4,7 +4,8 @@
   "description": "Hapi plugin for Bookshelf",
   "main": "index",
   "scripts": {
-    "test": "make test-cov"
+    "test": "make test-cov",
+    "test-no-make": "lab -r console -t 100 -v"
   },
   "repository": {
     "type": "git",
