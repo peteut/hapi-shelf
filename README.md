@@ -10,9 +10,6 @@ https://david-dm.org/peteut/hapi-shelf)
 https://coveralls.io/r/peteut/hapi-shelf?branch=master)
 [![npm version](https://badge.fury.io/js/hapi-shelf.svg)](
 http://badge.fury.io/js/hapi-shelf)
-[![Build Status (private)](
-https://oberon.unibe.ch:443/jenkins/job/hapi-bookshelf/badge/icon)](
-https://oberon.unibe.ch:443/jenkins/job/hapi-bookshelf/)
 
 **hapi-shelf** is a [Hapi](http://hapijs.com) plugin for [Bookshelf.js](
 http://bookshelfjs.org), an ORM for RDBMS.
