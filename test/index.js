@@ -14,24 +14,42 @@ var HapiShelf = require('../');
 
 var lab = exports.lab = Lab.script();
 var describe = lab.describe;
+var before = lab.before;
+var after = lab.after;
 var it = lab.it;
 var expect = Code.expect;
 
-//var inspect = R.rPartial(Util.inspect, false, null, true);
 var throwIfError = R.ifElse(R.is(Error),
     function (err) {
+
         throw err;
     },
     function () { }
 );
 
+
 var getPlugin = R.pipe(R.prop('plugins'), R.prop(Pkg.name));
+
 
 describe('Hapi-shelf', function () {
 
-    describe('register()', function () {
+    var server = null;
 
-        //console.log(Hoek.callStack());
+    before(function (done) {
+
+        server = new Hapi.Server();
+        done();
+    });
+
+   after(function (done) {
+
+       server.stop(function () {
+
+           done();
+       });
+   });
+
+   describe('register()', function () {
 
         var optionsSqlite3WithModel = {
             knex: {
@@ -45,14 +63,27 @@ describe('Hapi-shelf', function () {
 
         it('registers plugin w/ sqlite3', function (done) {
 
-            var server = new Hapi.Server();
             server.register({ register: HapiShelf,
                 options: R.omit(['plugins', 'models'],
                     optionsSqlite3WithModel) },
                 function (err) {
 
                     expect(err).to.be.undefined();
-                    expect(server.plugins[Pkg.name]).to.be.an.object();
+                    expect(getPlugin(server)).to.be.an.object();
+                    done();
+                }
+            );
+        });
+
+        it('registers plugin w/ debug enabled', function (done) {
+
+            server.register({ register: HapiShelf,
+                    options: R.mixin(optionsSqlite3WithModel, { debug: true })
+                },
+                function (err) {
+
+                    expect(err).to.be.undefined();
+                    expect(getPlugin(server)).to.be.an.object();
                     done();
                 }
             );
@@ -66,12 +97,11 @@ describe('Hapi-shelf', function () {
                     connection: 'connection string'
                 }
             };
-            var server = new Hapi.Server();
             server.register({ register: HapiShelf, options: options },
                 function (err) {
 
                     expect(err).to.be.undefined();
-                    expect(server.plugins[Pkg.name]).to.be.an.object();
+                    expect(getPlugin(server)).to.be.an.object();
                     done();
                 }
             );
@@ -85,7 +115,6 @@ describe('Hapi-shelf', function () {
                     connection: {}
                 }
             };
-            var server = new Hapi.Server();
             server.register({ register: HapiShelf, options: options },
                 function (err) {
 
@@ -102,52 +131,47 @@ describe('Hapi-shelf', function () {
                     client: 'mysql'
                 }
             };
-            var server = new Hapi.Server();
-            expect(
-                function () {
+            expect(function () {
 
-                    return server.register({ register: HapiShelf,
-                        options: options },
-                        throwIfError);
-                }
-            ).to.throw(/Invalid options .+/);
+                return server.register({ register: HapiShelf,
+                    options: options },
+                    throwIfError);
+            }).to.throw(/Invalid options .+/);
             done();
         });
 
         it('returns an Error on bogus options.knex.client', function (done) {
 
             var options = {
-                kne: {
-                    client: 'bogos-client'
+                knex: {
+                    client: 'bogos-client',
+                    connection: {}
                 }
             };
-            var server = new Hapi.Server();
-            expect(
-                function () {
+            expect(function () {
 
-                    return server.register({ register: HapiShelf,
-                        options: options },
-                        throwIfError);
-                }
-            ).to.throw(/Invalid knex options: .+/);
+                return server.register({ register: HapiShelf,
+                    options: options },
+                    throwIfError);
+            }).to.throw(/Invalid knex options: .+/);
             done();
         });
 
         it('registers plugin plugins', function (done) {
 
-            var server = new Hapi.Server();
             server.register({ register: HapiShelf,
                 options: optionsSqlite3WithModel },
                 function (err) {
 
                     expect(err).to.be.undefined();
-                    expect(server.plugins[Pkg.name]).to.be.an.object();
+                    expect(getPlugin(server)).to.be.an.object();
                     done();
                 }
             );
         });
 
         it('returns an Error on bogus options.plugins', function (done) {
+
             var options = {
                 knex: {
                     client: 'sqlite3',
@@ -157,19 +181,30 @@ describe('Hapi-shelf', function () {
                 },
                 plugins: [123]
             };
-            var server = new Hapi.Server();
-            expect(
-                function () {
+            expect(function () {
 
-                    server.register({ register: HapiShelf, options: options },
-                        throwIfError);
-                }
-            ).to.throw(/Invalid plugin .+/);
+                server.register({ register: HapiShelf, options: options },
+                    throwIfError);
+            }).to.throw(/Invalid options .+/);
             done();
         });
 
+        it('returns an Error on bogus (not available) options.plugins',
+            function (done) {
+
+                expect(function () {
+
+                    server.register({ register: HapiShelf,
+                        options: R.mixin(optionsSqlite3WithModel,
+                            { plugins: ['bogos'] })
+                        },
+                        throwIfError);
+                }).to.throw(/Cannot find module .+/);
+                done();
+            }
+        );
+
         it('loads models', function (done) {
-            var server = new Hapi.Server();
             server.register({ register: HapiShelf,
                 options: optionsSqlite3WithModel },
                 function (err) {
@@ -183,24 +218,31 @@ describe('Hapi-shelf', function () {
         });
 
         it('returns an Error on bogus options.models', function (done) {
-            var server = new Hapi.Server();
-            expect(
-                function () {
+            expect(function () {
 
-                    server.register(
-                        {
-                            register: HapiShelf,
-                            options: R.mixin(optionsSqlite3WithModel,
-                                { models: [123] })
-                        },
-                        throwIfError);
-                }
-            ).to.throw(/Invalid model path .+/);
+                server.register({ register: HapiShelf,
+                    options: R.mixin(optionsSqlite3WithModel,
+                        { models: [123] })
+                },
+                throwIfError);
+            }).to.throw(/Invalid options .+/);
+            done();
+        });
+
+        it('returns an Error on bogus (non existing) options.models',
+            function (done) {
+            expect(function () {
+
+                server.register({ register: HapiShelf,
+                    options: R.mixin(optionsSqlite3WithModel,
+                        { models: ['bogus'] })
+                },
+                throwIfError);
+            }).to.throw(/Cannot find module .+/);
             done();
         });
 
         it('implements Model.parse()', function (done) {
-            var server = new Hapi.Server();
             server.register({ register: HapiShelf,
                 options: optionsSqlite3WithModel },
                 function (err) {
@@ -209,8 +251,7 @@ describe('Hapi-shelf', function () {
                         throw err;
                     }
                     /* eslint-disable */
-                    expect(
-                        getPlugin(server).model('Simple').forge()
+                    expect(getPlugin(server).model('Simple').forge()
                         .parse({ foo_bar: 1 })
                     ).to.include('fooBar');
                     /* eslint-enable */
@@ -220,7 +261,6 @@ describe('Hapi-shelf', function () {
         });
 
         it('implements Model.format()', function (done) {
-            var server = new Hapi.Server();
             server.register({ register: HapiShelf,
                 options: optionsSqlite3WithModel },
                 function (err) {
@@ -228,8 +268,7 @@ describe('Hapi-shelf', function () {
                     if (err) {
                         throw err;
                     }
-                    expect(
-                        getPlugin(server).model('Simple').forge()
+                    expect(getPlugin(server).model('Simple').forge()
                         .format({ fooBar: 1 })
                     ).to.include('foo_bar');
                     done();
