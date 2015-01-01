@@ -2,7 +2,6 @@
 
 // Load modules
 
-var Path = require('path');
 var Hapi = require('hapi');
 var Code = require('code');
 var Lab = require('lab');
@@ -32,6 +31,8 @@ describe('Hapi-shelf', function () {
 
     describe('register()', function () {
 
+        //console.log(Hoek.callStack());
+
         var optionsSqlite3WithModel = {
             knex: {
                 client: 'sqlite3',
@@ -39,7 +40,7 @@ describe('Hapi-shelf', function () {
                     filename: './db.sqlite'
                 }
             },
-            models: [Path.join(__dirname, './models/simple')]
+            models: ['./models/simple']
         };
 
         it('registers plugin w/ sqlite3', function (done) {

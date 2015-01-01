@@ -6,6 +6,7 @@
         "quotes": [2, "single"],
         "brace-style": [2, "stroustrup", { "allowSingleLine": true }],
         "func-style": [2, "declaration"],
-        "consistent-this": [0, "self"]
+        "consistent-this": [0, "self"],
+        "no-underscore-dangle": false
     }
 }

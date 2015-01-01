@@ -28,7 +28,8 @@ npm install hapi-shelf --save
 Register the plugin with the server:
 
 ```javascript
-var Path = require('path');
+`use strict`;
+
 var Hapi = require('hapi');
 var HapiShelf = require('hapi-shelf');
 
@@ -48,10 +49,10 @@ server.register(
                     database: 'db_name'
                 }
             },
-            // Bookshelf Plugins.
+            // Bookshelf Plugins
             plugins: ['registry'],
-            // Register models w/ Bookshelf.
-            models: [Path.join(__dirname, './models/user')],
+            // Register models w/ Bookshelf
+            models: ['./models/user'],
         }
     },
     function (err) {
@@ -60,7 +61,7 @@ server.register(
             // Cannot proceed from here.
             throw err;
         }
-        // Bookshelf instance is now available at server.plugins['hapi-shelf'].
+        // Bookshelf instance is now available at server.plugins['hapi-shelf']
     }
 );
 ```
@@ -70,3 +71,24 @@ server.register(
 * `knex` - (required) the [knex](http://knexjs.org) configuration object.
 * `plugins` - an optional array of strings. Defaults to `['registry']`.
 * `models` - an optional array of model strings.
+
+## Models
+
+Models are registered automatically upon plugin registration if defined
+in `options.plugins.models`, using relative paths.
+Models are defined as follows.
+
+```javascript
+`use strict`;
+
+module.exports = function (bookshelf) {
+
+    var MyModel = bookshelf.Model.extend({
+        tableName: 'my_model'
+    });
+
+    return bookshelf.model('MyModel', MyModel);
+};
+```
+
+For details refer to [Bookshelf Models](http://bookshelfjs.org/#Model).
