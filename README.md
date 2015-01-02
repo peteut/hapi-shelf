@@ -75,7 +75,7 @@ server.register(
 ## Models
 
 Models are registered automatically upon plugin registration if defined
-in `options.plugins.models`, using relative paths.
+in `options.models`, using relative paths.
 Models are defined as follows.
 
 ```javascript

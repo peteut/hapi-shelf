@@ -5,6 +5,7 @@
 var Hapi = require('hapi');
 var Code = require('code');
 var Lab = require('lab');
+var Hoek = require('hoek');
 var R = require('ramda');
 
 var Pkg = require('../package.json');
@@ -78,7 +79,8 @@ describe('Hapi-shelf', function () {
         it('registers plugin w/ debug enabled', function (done) {
 
             server.register({ register: HapiShelf,
-                    options: R.mixin(optionsSqlite3WithModel, { debug: true })
+                    options: Hoek.merge(optionsSqlite3WithModel,
+                    { knex: { debug: true  } })
                 },
                 function (err) {
 
