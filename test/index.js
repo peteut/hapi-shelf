@@ -79,7 +79,7 @@ describe('Hapi-shelf', function () {
         it('registers plugin w/ debug enabled', function (done) {
 
             server.register({ register: HapiShelf,
-                    options: Hoek.merge(optionsSqlite3WithModel,
+                    options: Hoek.applyToDefaults(optionsSqlite3WithModel,
                     { knex: { debug: true  } })
                 },
                 function (err) {
