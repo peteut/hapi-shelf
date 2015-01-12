@@ -22,10 +22,12 @@
   },
   "homepage": "https://github.com/peteut/hapi-shelf",
   "devDependencies": {
+    "bookshelf": "^0.7.9",
     "code": "^1.2.1",
     "coveralls": "^2.11.2",
     "eslint": "^0.11",
     "hapi": "^8.0.0",
+    "knex": "^0.7.3",
     "lab": "^5.1.0",
     "mysql": "^2.5.4",
     "sqlite3": "^3.0.4"
