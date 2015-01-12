@@ -2,13 +2,14 @@
 
 [![Build Status](https://travis-ci.org/peteut/hapi-shelf.svg)](
 https://travis-ci.org/peteut/hapi-shelf)
-[![Build
-Status](https://ci.appveyor.com/api/projects/status/github/peteut/hapi-shelf?svg=true)](
+[![Build Status](https://ci.appveyor.com/api/projects/status/github/peteut/hapi-shelf?svg=true)](
 https://ci.appveyor.com/project/peteut/hapi-shelf)
-[![Dependencies](https://david-dm.org/peteut/hapi-shelf.svg)](
+[![Dependency Status](https://david-dm.org/peteut/hapi-shelf.svg)](
 https://david-dm.org/peteut/hapi-shelf)
-[![devDependencies](https://david-dm.org/peteut/hapi-shelf/dev-status.svg)](
-https://david-dm.org/peteut/hapi-shelf)
+[![peerDependency Status](https://david-dm.org/peteut/hapi-shelf/peer-status.svg)](
+https://david-dm.org/peteut/hapi-shelf#info=peerDependencies)
+[![devDependency Status](https://david-dm.org/peteut/hapi-shelf/dev-status.svg)](
+https://david-dm.org/peteut/hapi-shelf#info=devDependencies)
 [![Coverage Status](https://img.shields.io/coveralls/peteut/hapi-shelf.svg)](
 https://coveralls.io/r/peteut/hapi-shelf?branch=master)
 [![npm version](https://badge.fury.io/js/hapi-shelf.svg)](
@@ -90,5 +91,7 @@ module.exports = function (bookshelf) {
     return bookshelf.model('MyModel', MyModel);
 };
 ```
+
+Attributes are exposed as `camelCase`, and saved to the DB as `under_score`.
 
 For details refer to [Bookshelf Models](http://bookshelfjs.org/#Model).
