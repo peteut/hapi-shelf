@@ -6,8 +6,6 @@ https://travis-ci.org/peteut/hapi-shelf)
 https://ci.appveyor.com/project/peteut/hapi-shelf)
 [![Dependency Status](https://david-dm.org/peteut/hapi-shelf.svg)](
 https://david-dm.org/peteut/hapi-shelf)
-[![peerDependency Status](https://david-dm.org/peteut/hapi-shelf/peer-status.svg)](
-https://david-dm.org/peteut/hapi-shelf#info=peerDependencies)
 [![devDependency Status](https://david-dm.org/peteut/hapi-shelf/dev-status.svg)](
 https://david-dm.org/peteut/hapi-shelf#info=devDependencies)
 [![Coverage Status](https://img.shields.io/coveralls/peteut/hapi-shelf.svg)](
