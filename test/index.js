@@ -197,7 +197,7 @@ describe('Hapi-shelf', function () {
                 expect(function () {
 
                     server.register({ register: HapiShelf,
-                        options: R.mixin(optionsSqlite3WithModel,
+                        options: R.merge(optionsSqlite3WithModel,
                             { plugins: ['bogos'] })
                         },
                         throwIfError);
@@ -223,7 +223,7 @@ describe('Hapi-shelf', function () {
             expect(function () {
 
                 server.register({ register: HapiShelf,
-                    options: R.mixin(optionsSqlite3WithModel,
+                    options: R.merge(optionsSqlite3WithModel,
                         { models: [123] })
                 },
                 throwIfError);
@@ -236,7 +236,7 @@ describe('Hapi-shelf', function () {
             expect(function () {
 
                 server.register({ register: HapiShelf,
-                    options: R.mixin(optionsSqlite3WithModel,
+                    options: R.merge(optionsSqlite3WithModel,
                         { models: ['bogus'] })
                 },
                 throwIfError);
