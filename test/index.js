@@ -59,7 +59,7 @@ describe('Hapi-shelf', function () {
                     filename: ':memory:'
                 }
             },
-            models: ['./models/simple']
+            models: ['./test/models/simple']
         };
 
         it('registers plugin w/ sqlite3', function (done) {

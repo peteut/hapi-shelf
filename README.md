@@ -51,6 +51,8 @@ server.register(
             // Bookshelf Plugins
             plugins: ['registry'],
             // Register models w/ Bookshelf
+            // If models are in the root of your app, if they are inside a directory
+            // deeper, make sure to include the link to there. `./src/models/user`, for example
             models: ['./models/user'],
         }
     },
@@ -88,6 +90,28 @@ module.exports = function (bookshelf) {
 
     return bookshelf.model('MyModel', MyModel);
 };
+```
+
+# Access this model in your route
+
+```javascript
+'use strict';
+
+var MyModel = server.plugins['hapi-shelf'].model('MyModel');
+
+server.route([
+    {
+        method: 'GET',
+        path: '/projects',
+        config: {
+            handler: function(request, reply) {
+                MyModel.fetchAll().then(function(models){
+                    reply(models);
+                });
+            }
+        }
+    }
+]);
 ```
 
 Attributes are exposed as `camelCase`, and saved to the DB as `under_score`.
