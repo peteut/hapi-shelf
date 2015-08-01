@@ -105,7 +105,7 @@ server.route([
         path: '/projects',
         config: {
             handler: function(request, reply) {
-                MyModel.fetchAll().then(function(models){
+                MyModel.fetchAll().then(function(models) {
                     reply(models);
                 });
             }
