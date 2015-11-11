@@ -22,21 +22,21 @@
   },
   "homepage": "https://github.com/peteut/hapi-shelf",
   "devDependencies": {
-    "code": "^1.4.1",
+    "code": "^2.0.1",
     "coveralls": "^2.11.2",
-    "eslint": "^1.0.0",
-    "hapi": "^8.8.0",
-    "lab": "^5.13.0",
-    "mysql": "^2.8.0",
+    "eslint": "^1.9.0",
+    "hapi": "^11.1.0",
+    "lab": "^7.2.0",
+    "mysql": "^2.9.0",
     "sqlite3": "^3.0.9",
     "xyz": "^0.5.0"
   },
   "dependencies": {
-    "bookshelf": "^0.8.1",
-    "hoek": "^2.11.1",
-    "joi": "^6.5.0",
-    "knex": "^0.8.6",
-    "ramda": "^0.17.1",
+    "bookshelf": "^0.9.1",
+    "hoek": "^3.0.1",
+    "joi": "^7.0.0",
+    "knex": "^0.9.0",
+    "ramda": "^0.18.0",
     "string": "^3.0.0"
   }
 }

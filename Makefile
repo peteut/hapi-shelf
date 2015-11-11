@@ -1,25 +1,25 @@
 LAB = node_modules/lab/bin/lab
+ARGS = --ignore __core-js_shared__,Intl,core
 COVERALLS = node_modules/.bin/coveralls
+NODE = node
 
 test:
-	@node $(LAB) -v
+	@$(NODE) $(LAB) $(ARGS) -v
 
 test-cov:
-	@node $(LAB) -t 100 -v
+	@$(NODE) $(LAB) $(ARGS) -t 100 -v
 	$(if $(TRAVIS), $(MAKE) coveralls)
 
 coveralls:
-	@node $(LAB) -r lcov | $(COVERALLS)
+	@$(NODE) $(LAB) $(ARGS) -r lcov | $(COVERALLS)
 
 test-cov-junit:
-	@node $(LAB) -t 100 -r junit -o test-reports.xml -v
+	@$(NODE) $(LAB) $(ARGS) -t 100 -r junit -o test-reports.xml -v
 
 test-cov-html:
-	@node $(LAB) -r html -o coverage.html -v
+	@$(NODE) $(LAB) $(ARGS) -r html -o coverage.html -v
 
 lint:
-	@node $(LAB) -L -v
+	@$(NODE) $(LAB) $(ARGS) -L -v
 
-test-jenkins: test-cov-junit lint
-
-.PHONY: test test-cov test-cov-junit test-cov-html lint test-jenkins
+.PHONY: test test-cov test-cov-junit test-cov-html lint
