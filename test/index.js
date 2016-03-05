@@ -57,7 +57,8 @@ describe('Hapi-shelf', function () {
                 client: 'sqlite3',
                 connection: {
                     filename: ':memory:'
-                }
+                },
+                useNullAsDefault: true
             },
             models: ['./test/models/simple']
         };

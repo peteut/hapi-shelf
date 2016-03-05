@@ -1,5 +1,5 @@
 LAB = node_modules/lab/bin/lab
-ARGS = --ignore __core-js_shared__,Intl,core
+ARGS = --ignore __core-js_shared__,Intl,core,System,_babelPolyfill,Reflect,regeneratorRuntime
 COVERALLS = node_modules/.bin/coveralls
 NODE = node
 
