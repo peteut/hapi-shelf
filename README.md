@@ -25,7 +25,7 @@ npm install hapi-shelf --save
 Register the plugin with the server:
 
 ```javascript
-`use strict`;
+'use strict';
 
 var Hapi = require('hapi');
 var HapiShelf = require('hapi-shelf');
@@ -78,7 +78,7 @@ in `options.models`, using relative paths.
 Models are defined as follows.
 
 ```javascript
-`use strict`;
+'use strict';
 
 module.exports = function (bookshelf) {
 
