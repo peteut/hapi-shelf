@@ -1,6 +1,6 @@
 {
   "name": "hapi-shelf",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "Hapi plugin for Bookshelf",
   "main": "index",
   "scripts": {
@@ -28,7 +28,7 @@
     "string": "^3.3.1"
   },
   "peerDependencies": {
-      "bookshelf": "^0.10"
+    "bookshelf": "^0.10"
   },
   "devDependencies": {
     "knex": "^0.11.9",
