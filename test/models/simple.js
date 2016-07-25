@@ -2,7 +2,7 @@
 
 module.exports = function (bookshelf) {
 
-    var Simple = bookshelf.Model.extend({
+    const Simple = bookshelf.Model.extend({
             tableName: 'table'
     });
 

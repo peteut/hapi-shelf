@@ -27,10 +27,10 @@ Register the plugin with the server:
 ```javascript
 'use strict';
 
-var Hapi = require('hapi');
-var HapiShelf = require('hapi-shelf');
+const Hapi = require('hapi');
+const HapiShelf = require('hapi-shelf');
 
-var server = Hapi.Server();
+const server = Hapi.Server();
 
 server.register(
     {
@@ -82,7 +82,7 @@ Models are defined as follows.
 
 module.exports = function (bookshelf) {
 
-    var MyModel = bookshelf.Model.extend({
+    const MyModel = bookshelf.Model.extend({
         tableName: 'my_model'
     });
 
@@ -95,7 +95,7 @@ module.exports = function (bookshelf) {
 ```javascript
 'use strict';
 
-var MyModel = server.plugins['hapi-shelf'].model('MyModel');
+const MyModel = server.plugins['hapi-shelf'].model('MyModel');
 
 server.route([
     {

@@ -2,25 +2,25 @@
 
 // Load modules
 
-var Hapi = require('hapi');
-var Code = require('code');
-var Lab = require('lab');
-var Hoek = require('hoek');
-var R = require('ramda');
+const Hapi = require('hapi');
+const Code = require('code');
+const Lab = require('lab');
+const Hoek = require('hoek');
+const R = require('ramda');
 
-var Pkg = require('../package.json');
-var HapiShelf = require('../');
+const Pkg = require('../package.json');
+const HapiShelf = require('../');
 
 // Test shortcuts
 
-var lab = exports.lab = Lab.script();
-var describe = lab.describe;
-var before = lab.before;
-var after = lab.after;
-var it = lab.it;
-var expect = Code.expect;
+const lab = exports.lab = Lab.script();
+const describe = lab.describe;
+const before = lab.before;
+const after = lab.after;
+const it = lab.it;
+const expect = Code.expect;
 
-var throwIfError = R.ifElse(R.is(Error),
+const throwIfError = R.ifElse(R.is(Error),
     function (err) {
 
         throw err;
@@ -29,7 +29,7 @@ var throwIfError = R.ifElse(R.is(Error),
 );
 
 
-var getPlugin = R.pipe(R.prop('plugins'), R.prop(Pkg.name));
+const getPlugin = R.pipe(R.prop('plugins'), R.prop(Pkg.name));
 
 
 describe('Hapi-shelf', function () {
@@ -52,7 +52,7 @@ describe('Hapi-shelf', function () {
 
     describe('register()', function () {
 
-        var optionsSqlite3WithModel = {
+        const optionsSqlite3WithModel = {
             knex: {
                 client: 'sqlite3',
                 connection: {
@@ -95,7 +95,7 @@ describe('Hapi-shelf', function () {
 
         it('registers plugin w/ mysql connection string', function (done) {
 
-            var options = {
+            const options = {
                 knex: {
                     client: 'mysql',
                     connection: 'connection string'
@@ -115,7 +115,7 @@ describe('Hapi-shelf', function () {
 
         it('registers plugin w/ mysql connection objects', function (done) {
 
-            var options = {
+            const options = {
                 knex: {
                     client: 'mysql',
                     connection: {}
@@ -134,7 +134,7 @@ describe('Hapi-shelf', function () {
 
         it('returns an Error on bogus options.knex.connection', function (done) {
 
-            var options = {
+            const options = {
                 knex: {
                     client: 'mysql'
                 }
@@ -150,7 +150,7 @@ describe('Hapi-shelf', function () {
 
         it('returns an Error on bogus options.knex.client', function (done) {
 
-            var options = {
+            const options = {
                 knex: {
                     client: 'bogos-client',
                     connection: {}
@@ -180,7 +180,7 @@ describe('Hapi-shelf', function () {
 
         it('returns an Error on bogus options.plugins', function (done) {
 
-            var options = {
+            const options = {
                 knex: {
                     client: 'sqlite3',
                     connection: {
