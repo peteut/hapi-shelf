@@ -24,7 +24,7 @@
   "dependencies": {
     "hoek": "^4.0.1",
     "joi": "^9.0.1",
-    "ramda": "^0.21.0",
+    "ramda": "^0.22.1",
     "string": "^3.3.1"
   },
   "peerDependencies": {
