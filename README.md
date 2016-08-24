@@ -46,6 +46,10 @@ server.register(
                     database: 'db_name'
                 }
             },
+            pool: {
+                min: 2,
+                max: 10
+            },
             // Bookshelf Plugins
             plugins: ['registry'],
             // Register models w/ Bookshelf
