@@ -50,6 +50,7 @@ server.register(
                 min: 2,
                 max: 10
             },
+            acquireConnectionTimeout: 10000,
             // Bookshelf Plugins
             plugins: ['registry'],
             // Register models w/ Bookshelf

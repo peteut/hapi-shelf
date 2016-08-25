@@ -58,7 +58,8 @@ describe('Hapi-shelf', function () {
                 connection: {
                     filename: ':memory:'
                 },
-                useNullAsDefault: true
+                useNullAsDefault: true,
+                acquireConnectionTimeout: 10000
             },
             models: ['./test/models/simple']
         };
