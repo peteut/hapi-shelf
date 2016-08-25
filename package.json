@@ -4,8 +4,8 @@
   "description": "Hapi plugin for Bookshelf",
   "main": "index",
   "scripts": {
-    "test": "make test-cov",
-    "test-no-make": "lab -r console -t 100 -v"
+    "test": "lab -v -t 100 -L --globals __core-js_shared__",
+    "xyz": "xyz"
   },
   "repository": {
     "type": "git",
@@ -15,6 +15,9 @@
     "hapi",
     "bookshelf"
   ],
+  "engines": {
+    "node": ">=4.0.0"
+  },
   "author": "Alain Péteut <alain.peteut@yahoo.com>",
   "license": "MIT",
   "bugs": {
@@ -33,13 +36,10 @@
   "devDependencies": {
     "bookshelf": "^0.10.0",
     "code": "^3.0.1",
-    "coveralls": "^2.11.11",
-    "eslint": "^3.1.1",
     "hapi": "^14.2.0",
     "knex": "^0.11.9",
     "lab": "^11.0.1",
-    "mysql": "^2.9.0",
     "sqlite3": "^3.1.4",
-    "xyz": "^1.0.0"
+    "xyz": "^0.5.0"
   }
 }

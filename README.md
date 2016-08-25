@@ -6,8 +6,6 @@ https://travis-ci.org/peteut/hapi-shelf)
 https://david-dm.org/peteut/hapi-shelf)
 [![devDependency Status](https://david-dm.org/peteut/hapi-shelf/dev-status.svg)](
 https://david-dm.org/peteut/hapi-shelf#info=devDependencies)
-[![Coverage Status](https://img.shields.io/coveralls/peteut/hapi-shelf.svg)](
-https://coveralls.io/r/peteut/hapi-shelf?branch=master)
 [![npm version](https://badge.fury.io/js/hapi-shelf.svg)](
 http://badge.fury.io/js/hapi-shelf)
 
@@ -30,7 +28,7 @@ Register the plugin with the server:
 const Hapi = require('hapi');
 const HapiShelf = require('hapi-shelf');
 
-const server = Hapi.Server();
+const server = new Hapi.Server();
 
 server.register(
     {
@@ -59,7 +57,7 @@ server.register(
             models: ['./models/user'],
         }
     },
-    function (err) {
+    (err) => {
 
         if (err) {
             // Cannot proceed from here.
@@ -85,7 +83,7 @@ Models are defined as follows.
 ```javascript
 'use strict';
 
-module.exports = function (bookshelf) {
+module.exports = (bookshelf) => {
 
     const MyModel = bookshelf.Model.extend({
         tableName: 'my_model'
@@ -107,8 +105,10 @@ server.route([
         method: 'GET',
         path: '/projects',
         config: {
-            handler: function(request, reply) {
-                MyModel.fetchAll().then(function(models) {
+            handler: (request, reply) => {
+
+                MyModel.fetchAll().then((models) => {
+
                     reply(models);
                 });
             }

@@ -20,37 +20,30 @@ const after = lab.after;
 const it = lab.it;
 const expect = Code.expect;
 
-const throwIfError = R.ifElse(R.is(Error),
-    function (err) {
+const throwIfError = R.when(R.is(Error),
+    (err) => {
 
         throw err;
-    },
-    function () { }
+    }
 );
 
 
 const getPlugin = R.pipe(R.prop('plugins'), R.prop(Pkg.name));
 
 
-describe('Hapi-shelf', function () {
+describe('Hapi-shelf', () => {
 
-    var server = null;
+    let server = null;
 
-    before(function (done) {
+    before((done) => {
 
         server = new Hapi.Server();
         done();
     });
 
-    after(function (done) {
+    after((done) => server.stop(() => done()));
 
-        server.stop(function () {
-
-            done();
-        });
-    });
-
-    describe('register()', function () {
+    describe('register()', () => {
 
         const optionsSqlite3WithModel = {
             knex: {
@@ -58,20 +51,21 @@ describe('Hapi-shelf', function () {
                 connection: {
                     filename: ':memory:'
                 },
+                pool: { min: 1, max: 1 },
                 useNullAsDefault: true,
-                acquireConnectionTimeout: 10000
+                acquireConnectionTimeout: 1000
             },
             models: ['./test/models/simple']
         };
 
-        it('registers plugin w/ sqlite3', function (done) {
+        it('registers plugin w/ sqlite3', (done) => {
 
             server.register({
                 register: HapiShelf,
                 options: R.omit(['plugins', 'models'],
                                 optionsSqlite3WithModel)
             },
-            function (err) {
+            (err) => {
 
                 expect(err).to.not.exist();
                 expect(getPlugin(server)).to.be.an.object();
@@ -79,14 +73,14 @@ describe('Hapi-shelf', function () {
             });
         });
 
-        it('registers plugin w/ debug enabled', function (done) {
+        it('registers plugin w/ debug enabled', (done) => {
 
             server.register({
                 register: HapiShelf,
                 options: Hoek.applyToDefaults(optionsSqlite3WithModel,
                                               { knex: { debug: true } })
             },
-            function (err) {
+            (err) => {
 
                 expect(err).to.not.exist();
                 expect(getPlugin(server)).to.be.an.object();
@@ -94,62 +88,22 @@ describe('Hapi-shelf', function () {
             });
         });
 
-        it('registers plugin w/ mysql connection string', function (done) {
-
-            const options = {
-                knex: {
-                    client: 'mysql',
-                    connection: 'connection string'
-                }
-            };
-            server.register({
-                register: HapiShelf,
-                options: options
-            },
-            function (err) {
-
-                expect(err).to.not.exist();
-                expect(getPlugin(server)).to.be.an.object();
-                done();
-            });
-        });
-
-        it('registers plugin w/ mysql connection objects', function (done) {
-
-            const options = {
-                knex: {
-                    client: 'mysql',
-                    connection: {}
-                }
-            };
-            server.register({
-                register: HapiShelf,
-                options: options
-            },
-            function (err) {
-
-                expect(err).to.be.undefined();
-                done();
-            });
-        });
-
-        it('returns an Error on bogus options.knex.connection', function (done) {
+        it('returns an Error on bogus options.knex.connection', (done) => {
 
             const options = {
                 knex: {
                     client: 'mysql'
                 }
             };
-            expect(function () {
+            expect(() => {
 
-                return server.register({ register: HapiShelf,
-                                       options: options },
-                                       throwIfError);
+                return server.register({
+                    register: HapiShelf, options }, throwIfError);
             }).to.throw(/Invalid options .+/);
             done();
         });
 
-        it('returns an Error on bogus options.knex.client', function (done) {
+        it('returns an Error on bogus options.knex.client', (done) => {
 
             const options = {
                 knex: {
@@ -157,20 +111,19 @@ describe('Hapi-shelf', function () {
                     connection: {}
                 }
             };
-            expect(function () {
+            expect(() => {
 
-                return server.register({ register: HapiShelf,
-                                       options: options },
-                                       throwIfError);
+                return server.register({
+                    register: HapiShelf, options }, throwIfError);
             }).to.throw(/Invalid knex options: .+/);
             done();
         });
 
-        it('registers plugin plugins', function (done) {
+        it('registers plugin plugins', (done) => {
 
             server.register({ register: HapiShelf,
                             options: optionsSqlite3WithModel },
-                            function (err) {
+                            (err) => {
 
                                 expect(err).to.be.undefined();
                                 expect(getPlugin(server)).to.be.an.object();
@@ -179,7 +132,7 @@ describe('Hapi-shelf', function () {
                            );
         });
 
-        it('returns an Error on bogus options.plugins', function (done) {
+        it('returns an Error on bogus options.plugins', (done) => {
 
             const options = {
                 knex: {
@@ -190,22 +143,22 @@ describe('Hapi-shelf', function () {
                 },
                 plugins: [123]
             };
-            expect(function () {
+            expect(() => {
 
-                server.register({ register: HapiShelf, options: options },
-                                throwIfError);
+                server.register({
+                    register: HapiShelf, options }, throwIfError);
             }).to.throw(/Invalid options .+/);
             done();
         });
 
         it('returns an Error on bogus (not available) options.plugins',
-           function (done) {
+           (done) => {
 
-               expect(function () {
+               expect(() => {
 
                    server.register({ register: HapiShelf,
-                                   options: R.merge(optionsSqlite3WithModel,
-                                                    { plugins: ['bogos'] })
+                       options: R.merge(optionsSqlite3WithModel,
+                           { plugins: ['bogos'] })
                    },
                    throwIfError);
                }).to.throw(/Cannot find module .+/);
@@ -213,22 +166,25 @@ describe('Hapi-shelf', function () {
            }
           );
 
-        it('loads models', function (done) {
-             server.register({ register: HapiShelf,
-                             options: optionsSqlite3WithModel },
-                             function (err) {
+        it('loads models', (done) => {
 
-                                 expect(err).to.be.undefined();
-                                 expect(getPlugin(server)).to.be.an.object();
-                                 expect(getPlugin(server).model('Simple')
-                                       ).to.be.a.function();
-                                 done();
-                             }
-                            );
-         });
+            server.register({
+                register: HapiShelf,
+                options: optionsSqlite3WithModel },
+                (err) => {
 
-        it('returns an Error on bogus options.models', function (done) {
-            expect(function () {
+                    expect(err).to.be.undefined();
+                    expect(getPlugin(server)).to.be.an.object();
+                    expect(getPlugin(server).model('Simple')
+                    ).to.be.a.function();
+                    done();
+                }
+            );
+        });
+
+        it('returns an Error on bogus options.models', (done) => {
+
+            expect(() => {
 
                 server.register({ register: HapiShelf,
                     options: R.merge(optionsSqlite3WithModel,
@@ -240,48 +196,52 @@ describe('Hapi-shelf', function () {
         });
 
         it('returns an Error on bogus (non existing) options.models',
-            function (done) {
-            expect(function () {
+            (done) => {
 
-                server.register({ register: HapiShelf,
-                                options: R.merge(optionsSqlite3WithModel,
-                                                 { models: ['bogus'] })
-                },
-                throwIfError);
-            }).to.throw(/Cannot find module .+/);
-            done();
-        });
+                expect(() => {
 
-        it('implements Model.parse()', function (done) {
+                    server.register({ register: HapiShelf,
+                        options: R.merge(optionsSqlite3WithModel,
+                            { models: ['bogus'] })
+                    },
+                        throwIfError);
+                }).to.throw(/Cannot find module .+/);
+                done();
+            }
+        );
+
+        it('implements Model.parse()', (done) => {
+
             server.register({ register: HapiShelf,
                 options: optionsSqlite3WithModel },
-                function (err) {
+                (err) => {
 
                     if (err) {
                         throw err;
                     }
                     expect(getPlugin(server).model('Simple').forge()
-                           /* eslint-disable */
-                           .parse({ foo_bar: 1 })
-                           /* eslint-enable */
-                          ).to.include('fooBar');
-                          done();
+                        /* eslint-disable */
+                        .parse({ foo_bar: 1 })
+                        /* eslint-enable */
+                    ).to.include('fooBar');
+                    done();
                 }
             );
         });
 
-        it('implements Model.format()', function (done) {
+        it('implements Model.format()', (done) => {
+
             server.register({ register: HapiShelf,
                 options: optionsSqlite3WithModel },
-                function (err) {
+                (err) => {
 
                     if (err) {
                         throw err;
                     }
                     expect(getPlugin(server).model('Simple').forge()
-                           .format({ fooBar: 1 })
-                          ).to.include('foo_bar');
-                          done();
+                        .format({ fooBar: 1 })
+                    ).to.include('foo_bar');
+                    done();
                 }
             );
         });
