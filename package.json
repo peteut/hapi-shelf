@@ -29,7 +29,7 @@
     "hoek": "^5.0.0",
     "joi": "^11.3.4",
     "ramda": "^0.23.0",
-    "string": "^3.3.1",
+    "string": "^3.3.3",
     "xyz": "^2.1.0"
   },
   "peerDependencies": {
