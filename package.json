@@ -4,7 +4,7 @@
   "description": "Hapi plugin for Bookshelf",
   "main": "index",
   "scripts": {
-    "test": "lab -v -t 100 -L --globals __core-js_shared__",
+    "test": "lab -v -t 100 -L --globals __core-js_shared__,WebAssembly",
     "test:watch": "watch 'npm test' ./lib",
     "xyz": "xyz"
   },
