@@ -1,6 +1,6 @@
 {
   "name": "hapi-shelf",
-  "version": "1.2.12",
+  "version": "1.2.13",
   "description": "Hapi plugin for Bookshelf",
   "main": "index",
   "scripts": {
