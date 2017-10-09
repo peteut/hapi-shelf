@@ -122,7 +122,7 @@ describe('Hapi-shelf', () => {
         it('registers plugin plugins', (done) => {
 
             server.register({ register: HapiShelf,
-                            options: optionsSqlite3WithModel },
+                options: optionsSqlite3WithModel },
                             (err) => {
 
                                 expect(err).to.be.undefined();

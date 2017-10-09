@@ -26,22 +26,23 @@
   },
   "homepage": "https://github.com/peteut/hapi-shelf",
   "dependencies": {
-    "hoek": "^4.0.1",
-    "joi": "^9.0.1",
-    "ramda": "^0.22.1",
-    "string": "^3.3.1"
+    "hoek": "^5.0.0",
+    "joi": "^11.3.4",
+    "ramda": "^0.23.0",
+    "string": "^3.3.1",
+    "xyz": "^2.1.0"
   },
   "peerDependencies": {
     "bookshelf": "^0.10"
   },
   "devDependencies": {
     "bookshelf": "^0.10.0",
-    "code": "^3.0.1",
+    "code": "^4.1.0",
     "hapi": "^14.2.0",
-    "knex": "^0.11.9",
-    "lab": "^11.0.1",
-    "sqlite3": "^3.1.4",
-    "watch": "^0.19.2",
-    "xyz": "^0.5.0"
+    "knex": "^0.11.10",
+    "lab": "^12.1.0",
+    "sqlite3": "^3.1.13",
+    "watch": "^1.0.2",
+    "xyz": "^2.1.0"
   }
 }
